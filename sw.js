@@ -1,5 +1,5 @@
-// MedCare Service Worker v1.0
-const CACHE_NAME = 'medcare-v1';
+// MediTrack Service Worker v1.0
+const CACHE_NAME = 'meditrack-v1';
 const ASSETS = [
   './',
   './index.html',
@@ -57,7 +57,7 @@ self.addEventListener('fetch', event => {
 
 // ── PUSH NOTIFICATIONS (from server, future use) ──
 self.addEventListener('push', event => {
-  let data = { title: '💊 MedCare', body: 'Time to take your medication!' };
+  let data = { title: '💊 MediTrack', body: 'Time to take your medication!' };
   try { data = event.data.json(); } catch(e) {}
 
   event.waitUntil(
@@ -66,7 +66,7 @@ self.addEventListener('push', event => {
       icon: './icons/icon-192x192.png',
       badge: './icons/icon-72x72.png',
       vibrate: [200, 100, 200, 100, 200],
-      tag: data.tag || 'medcare-dose',
+      tag: data.tag || 'meditrack-dose',
       renotify: true,
       requireInteraction: true,
       actions: [
@@ -106,19 +106,19 @@ self.addEventListener('message', event => {
 
   if (event.data && event.data.type === 'DOSE_TAKEN') {
     const { label, medName } = event.data;
-    self.registration.showNotification('✅ Dose Logged — MedCare', {
+    self.registration.showNotification('✅ Dose Logged — MediTrack', {
       body: `${medName} ${label} dose has been marked as taken with photo proof.`,
       icon: './icons/icon-192x192.png',
       badge: './icons/icon-72x72.png',
       vibrate: [100, 50, 100],
-      tag: 'medcare-taken',
+      tag: 'meditrack-taken',
     });
   }
 });
 
 // ── PERIODIC BACKGROUND SYNC (if supported) ──
 self.addEventListener('periodicsync', event => {
-  if (event.tag === 'medcare-reminder-check') {
+  if (event.tag === 'meditrack-reminder-check') {
     event.waitUntil(checkDoseReminders());
   }
 });
