@@ -1,6 +1,6 @@
 {
-  "name": "MedCare — Medication Tracker",
-  "short_name": "MedCare",
+  "name": "MedTrack — Medication Tracker",
+  "short_name": "MedTrack",
   "description": "Track medications, share photo proof with your partner, and never miss a dose.",
   "start_url": "./index.html",
   "display": "standalone",
